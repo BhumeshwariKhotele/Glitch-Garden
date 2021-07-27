@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class LevelManager : MonoBehaviour
 {
@@ -8,22 +10,37 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        Invoke("LoadNextLevel", autoLoadLevelTimer);
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            Invoke("LoadNextLevel", autoLoadLevelTimer);
+        }
     }
-    [System.Obsolete]
+   
     public void LoadLevel(string name)
     {
-        Application.LoadLevel(name);
+        SceneManager.LoadScene(name);
     }
+
+    public void PreviousLevel(string name)
+    {
+        SceneManager.LoadScene(name);
+    }
+
 
     public void Quit()
     {
         Application.Quit();
     }
 
-    [System.Obsolete]
+    
     public void LoadNextLevel()
     {
-        Application.LoadLevel(Application.loadedLevel + 1);
+       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+ 1);
     }
+
+    public void PreviousNextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
 }
