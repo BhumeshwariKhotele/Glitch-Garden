@@ -9,11 +9,14 @@ public class Attackers : MonoBehaviour
     public float lizardWalkSpeed;
     Animator lizardAnim;
     SpriteRenderer lizardSprite;
+    private GameObject currentObject;
+
     void Start()
     {
         lizardAnim = GetComponent<Animator>();
-     //  Rigidbody2D rb =AddComponent<Rigidbody2D>();
+        Rigidbody2D rb =gameObject.AddComponent<Rigidbody2D>();
         lizardSprite = GetComponent<SpriteRenderer>();
+        rb.isKinematic = true;
     }
 
     // Update is called once per frame
@@ -22,25 +25,41 @@ public class Attackers : MonoBehaviour
         if (lizardWalkSpeed > 0)
         {
             lizardSprite.flipX = false;
-            lizardAnim.SetFloat("IsWalking", lizardWalkSpeed);
             transform.Translate(Vector3.left * lizardWalkSpeed * Time.deltaTime);
 
         }
 
-
-        if (lizardWalkSpeed < 0)
-        {
-            lizardSprite.flipX = true;
-            lizardAnim.SetFloat("IsWalking", lizardWalkSpeed);
-            transform.Translate(Vector3.left * lizardWalkSpeed * Time.deltaTime);
-          
-        }
 
         
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log( "triggered with" +name );
+
+
+    }
+
+    public void SetSpeed(float speed)
+    {
+        lizardWalkSpeed = speed;
+    }
+
+    public void StrikeCurrentTarget(float currentdamage)
+    {
+       
+        if (currentObject)
+        {
+          Health health=  currentObject.GetComponent<Health>();
+            if(health)
+            {
+                health.HealthDamage(currentdamage);
+            }
+        }
+    }
+
+    public void Attack(GameObject obj)
+    {
+        currentObject = obj;
     }
 }
