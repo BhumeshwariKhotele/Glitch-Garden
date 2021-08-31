@@ -331,24 +331,10 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: StrikeCurrentTarget
+    functionName: SetSpeed
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 2.5
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.5
-    functionName: StrikeCurrentTarget
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 5
-    intParameter: 0
-    messageOptions: 0
-  - time: 1
-    functionName: StrikeCurrentTarget
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 7.5
+    floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 1.5

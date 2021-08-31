@@ -10,6 +10,8 @@ public class Attackers : MonoBehaviour
     Animator lizardAnim;
     SpriteRenderer lizardSprite;
     private GameObject currentObject;
+    float currentDamage = 10.0f;
+    
 
     void Start()
     {
@@ -17,6 +19,7 @@ public class Attackers : MonoBehaviour
         Rigidbody2D rb =gameObject.AddComponent<Rigidbody2D>();
         lizardSprite = GetComponent<SpriteRenderer>();
         rb.isKinematic = true;
+        
     }
 
     // Update is called once per frame
@@ -36,8 +39,9 @@ public class Attackers : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
-
+        lizardAnim.SetTrigger("IsAttacking");
+        StrikeCurrentTarget(currentDamage);
+      
     }
 
     public void SetSpeed(float speed)
@@ -47,15 +51,15 @@ public class Attackers : MonoBehaviour
 
     public void StrikeCurrentTarget(float currentdamage)
     {
-       
-        if (currentObject)
+        GameObject.FindObjectOfType<Health>().HealthDamage(currentdamage);
+      /*  if (currentObject)
         {
           Health health=  currentObject.GetComponent<Health>();
             if(health)
             {
                 health.HealthDamage(currentdamage);
             }
-        }
+        }*/
     }
 
     public void Attack(GameObject obj)
